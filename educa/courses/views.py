@@ -1,9 +1,9 @@
 from django.urls import reverse_lazy
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
-from django.contrib.auth.mixin import (LoginRequiredMixin, PermissionRequiredMixin)
+from django.contrib.auth.mixins import (LoginRequiredMixin, PermissionRequiredMixin)
 from django.shortcuts import render
-from .models import Courses
+from .models import Course
 
 # Create your views here.
 class OwnerMixin:
