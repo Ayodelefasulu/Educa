@@ -12,6 +12,8 @@ from .forms import ModuleFormSet
 from django.apps import apps
 from django.forms.models import modelform_factory
 from .models import Module, Content
+# Import for drag and drop feature
+from braces.views import CsrfExemptMixin, JsonRequestResponseMixin
 
 
 # Mixins to be used with courses, modules and content
@@ -166,3 +168,21 @@ class ModuleContentListView(TemplateResponseMixin, View):
             Module, id=module_id, course__owner=request.user
         )
         return self.render_to_response({'module': module})
+
+# To drag and drop a module
+class ModuleOrderView(CsrfExemptMixin, JsonRequestResponseMixin, View):
+    def post(self, request):
+        for id, order in self.request_json.items():
+            Module.objects.filter(
+                id=id, course__owner=request.user
+            ).update(order=order)
+        return self.render_json_response({'saved': 'OK'})
+
+# To drag and drop a content
+class ContentOrderView(CsrfExemptMixin, JsonRequestResponseMixin, View):
+    def post(self, request):
+        for id, order in self.request_json.items():
+            Content.objects.filter(
+                id=id, module__course__owner=request.user
+            ).update(order=order)
+        return self.render_json_response({'saved': 'OK'})
