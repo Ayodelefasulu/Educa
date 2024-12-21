@@ -21,6 +21,8 @@ from .models import Subject
 from django.views.generic.detail import DetailView
 # import to add enroll button to course overview
 from students.forms import CourseEnrollForm
+# import to cache some queries
+from django.core.cache import cache
 
 
 # Mixins to be used with courses, modules and content
@@ -201,9 +203,19 @@ class CourseListView(TemplateResponseMixin, View):
     template_name = 'courses/course/list.html'
 
     def get(self, request, subject=None):
+        """
         subjects = Subject.objects.annotate(
             total_courses=Count('courses')
         )
+        """
+
+        subjects = cache.get('all_subjects')
+        if not subjects:
+            subjects = Subject.objects.annotate(
+                total_courses=Count('courses')
+            )
+            cache.set('all_subjects', subjects)
+
         courses = Course.objects.annotate(
             total_modules=Count('modules')
         )
