@@ -203,6 +203,7 @@ class CourseListView(TemplateResponseMixin, View):
     template_name = 'courses/course/list.html'
 
     def get(self, request, subject=None):
+        # to be replaced by caching
         """
         subjects = Subject.objects.annotate(
             total_courses=Count('courses')
@@ -216,12 +217,22 @@ class CourseListView(TemplateResponseMixin, View):
             )
             cache.set('all_subjects', subjects)
 
-        courses = Course.objects.annotate(
+        # cached content
+        all_courses = Course.objects.annotate(
             total_modules=Count('modules')
         )
         if subject:
             subject = get_object_or_404(Subject, slug=subject)
-            courses = courses.filter(subject=subject)
+            key = f'subject_{subbject.id}_courses'
+            courses = cache.get(key)
+            if not courses:
+                courses = all_courses.filter(subject=subject)
+                cache.set(key, courses)
+        else:
+            courses = cache.get('all_courses')
+            if not courses:
+                courses = all_courses
+                cache.set('all_courses', courses)
         return self.render_to_response(
             {
                 'subjects': subjects,
