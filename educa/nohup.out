@@ -209,3 +209,50 @@ Starting development server at http://0.0.0.0:8000/
 Quit the server with CONTROL-C.
 
 Watching for file changes with StatReloader
+[08/Jan/2025 10:42:53] "GET /api/subjects/3/ HTTP/1.1" 200 15102
+[08/Jan/2025 10:42:59] "GET /api/ HTTP/1.1" 200 14789
+[08/Jan/2025 10:43:07] "GET /api/courses/ HTTP/1.1" 200 17944
+/root/django-project/django-venv/lib/python3.12/site-packages/rest_framework/pagination.py:208: UnorderedObjectListWarning: Pagination may yield inconsistent results with an unordered object_list: <class 'courses.models.Subject'> QuerySet.
+  paginator = self.django_paginator_class(queryset, page_size)
+[08/Jan/2025 10:43:30] "GET /api/subjects/ HTTP/1.1" 200 16130
+[08/Jan/2025 10:43:56] "POST /api/courses/1/enroll/ HTTP/1.1" 200 17
+/root/django-project/Educa/educa/courses/api/serializers.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+January 08, 2025 - 10:41:10
+Django version 5.0.10, using settings 'educa.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+
+Watching for file changes with StatReloader
+/root/django-project/Educa/educa/courses/api/serializers.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+January 08, 2025 - 10:54:00
+Django version 5.0.10, using settings 'educa.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+
+Watching for file changes with StatReloader
+/root/django-project/Educa/educa/courses/api/serializers.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+January 08, 2025 - 10:55:03
+Django version 5.0.10, using settings 'educa.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+
+Watching for file changes with StatReloader
+/root/django-project/Educa/educa/courses/api/serializers.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+January 08, 2025 - 10:55:32
+Django version 5.0.10, using settings 'educa.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+
+Watching for file changes with StatReloader
