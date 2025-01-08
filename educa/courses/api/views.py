@@ -50,6 +50,8 @@ class CourseViewSet(viewsets.ReadOnlyModelViewSet):
     pagination_class = StandardPagination
 
     # implementation of additional action
+    # after implement the additional action,
+    # the CourseEnrollView class will be commented out below
     @action(
         detail=True,
         methods=['post'],
@@ -62,6 +64,7 @@ class CourseViewSet(viewsets.ReadOnlyModelViewSet):
         return Response({'enrolled': True})
 
 # implementing custom API views
+"""
 class CourseEnrollView(APIView):
     # implementing basic authentication
     authentication_classes = [BasicAuthentication]
@@ -71,4 +74,4 @@ class CourseEnrollView(APIView):
         course = get_object_or_404(Course, pk=pk)
         course.students.add(request.user)
         return Response({'enrolled': True})
-
+"""

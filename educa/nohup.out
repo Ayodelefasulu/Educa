@@ -189,3 +189,23 @@ Starting development server at http://0.0.0.0:8000/
 Quit the server with CONTROL-C.
 
 Watching for file changes with StatReloader
+/root/django-project/Educa/educa/courses/api/urls.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+January 08, 2025 - 10:35:46
+Django version 5.0.10, using settings 'educa.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+
+Watching for file changes with StatReloader
+/root/django-project/Educa/educa/courses/api/views.py changed, reloading.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+January 08, 2025 - 10:39:07
+Django version 5.0.10, using settings 'educa.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+
+Watching for file changes with StatReloader
