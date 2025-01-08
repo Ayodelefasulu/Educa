@@ -11,6 +11,10 @@ from courses.api.pagination import StandardPagination
 # import for viewset
 from rest_framework import viewsets
 
+# import for building custom API views
+from django.shortcuts import get_object_or_404
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 """
 class SubjectListView(generics.ListAPIView):
@@ -36,3 +40,11 @@ class CourseViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Course.objects.prefetch_related('modules')
     serializer_class = CourseSerializer
     pagination_class = StandardPagination
+
+# implementing custom API views
+class CourseEnrollView(APIView):
+    def post(self, request, pk, format=None):
+        course = get_object_or_404(Course, pk=pk)
+        course.students.add(request.user)
+        return Response({'enrolled': True})
+
