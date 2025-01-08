@@ -23,6 +23,10 @@ from rest_framework.permissions import IsAuthenticated
 # import to add addtional actions to viewset
 from rest_framework.decorators import action
 
+# import that mimics retrieve() action but includes course content
+from courses.api.permissions import IsEnrolled
+from courses.api.serializers import CourseWithContentsSerializer
+
 
 """
 class SubjectListView(generics.ListAPIView):
@@ -62,6 +66,17 @@ class CourseViewSet(viewsets.ReadOnlyModelViewSet):
         course = self.get_object()
         course.students.add(request.user)
         return Response({'enrolled': True})
+
+    # second action
+    @action(
+        detail=True,
+        methods=['get'],
+        serializer_class=CourseWithContentsSerializer,
+        authentication_classes=[BasicAuthentication],
+        permission_classes=[IsAuthenticated, IsEnrolled]
+    )
+    def contents(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
 
 # implementing custom API views
 """
