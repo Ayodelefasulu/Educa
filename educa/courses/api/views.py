@@ -16,6 +16,14 @@ from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+# import for basic authentication
+from rest_framework.authentication import BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
+
+# import to add addtional actions to viewset
+from rest_framework.decorators import action
+
+
 """
 class SubjectListView(generics.ListAPIView):
     # queryset = Subject.objects.all()
@@ -41,8 +49,24 @@ class CourseViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = CourseSerializer
     pagination_class = StandardPagination
 
+    # implementation of additional action
+    @action(
+        detail=True,
+        methods=['post'],
+        authentication_classes=[BasicAuthentication],
+        permission_classes=[IsAuthenticated]
+    )
+    def enroll(self, request, *args, **kwargs):
+        course = self.get_object()
+        course.students.add(request.user)
+        return Response({'enrolled': True})
+
 # implementing custom API views
 class CourseEnrollView(APIView):
+    # implementing basic authentication
+    authentication_classes = [BasicAuthentication]
+    permission_classes = [IsAuthenticated]
+
     def post(self, request, pk, format=None):
         course = get_object_or_404(Course, pk=pk)
         course.students.add(request.user)
