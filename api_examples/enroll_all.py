@@ -10,5 +10,5 @@ while url is not None:
     response = r.json()
     url = response['next']
     courses = response['results']
-    available_course += [course['title'] for course in courses]
-print(f'Available courses: {",".join(available_courses)}')
+    available_courses += [course['title'] for course in courses]
+print(f'Available courses: {", ".join(available_courses)}')
